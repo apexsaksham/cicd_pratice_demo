@@ -1,0 +1,28 @@
+name: Simple CI/CD
+
+# When to run: when you push code to main branch
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  # Step 1: Test the code
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - run: pip install -r requirements.txt
+    - run: pytest test_app.py -v
+
+  # Step 2: Build and deploy (only if tests pass)
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+    - run: docker build -t my-app .
+    - run: echo "App built successfully!"

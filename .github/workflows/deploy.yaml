@@ -4,7 +4,9 @@ name: Simple CI/CD
 on:
   push:
     branches: [ main ]
-
+    paths-ignore:
+      - 'README.md'
+      - '**/*.md'
 jobs:
   # Step 1: Test the code
   test:

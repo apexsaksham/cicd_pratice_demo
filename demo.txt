@@ -1,0 +1,8 @@
+
+
+
+                                          A lambda function in Python is a small, anonymous function
+                                          written in one line to perform 
+                                          a simple task quickly.
+
+                                          lambda arguments : expression

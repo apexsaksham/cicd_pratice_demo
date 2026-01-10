@@ -1,93 +1,98 @@
-🚀 End-to-End CI/CD Pipeline using GitHub Actions, Docker & AWS EC2
+#  End-to-End CI/CD Pipeline (GitHub Actions · Docker · AWS EC2)
 
-This project demonstrates a complete CI/CD pipeline that automatically tests, builds, and deploys a Python web application to an AWS EC2 instance using GitHub Actions and Docker.
+This project shows how a **simple Python web app** can be **automatically tested, built, and deployed** to an AWS EC2 server using a **real-world CI/CD pipeline**.
 
-🧩 Project Overview
+In short: **push code → pipeline runs → app updates by itself**.
 
-Whenever new code is pushed to the main branch:
+---
 
-🧪 Code Testing: Runs automated tests using pytest.
+## 🧩 What This Project Does
 
-🏗️ Build & Push: Builds a Docker image and pushes it to Docker Hub.
+Whenever code is pushed to the **main** branch:                --
 
-☁️ Deploy: Connects securely to an AWS EC2 instance and deploys the updated container.
+* 🧪 **Tests the code** using `pytest`
+* 🏗️ **Builds a Docker image** of the app
+* 📦 **Pushes the image** to Docker Hub
+* ☁️ **Deploys the app** on AWS EC2
+* 🔍 **Checks app health** to confirm it’s running
 
-🔍 Health Check: Verifies that the application is live and running properly.
+No manual work. No server login needed.
 
-⚙️ Tech Stack
+---
 
-CI/CD: GitHub Actions
+## ⚙️ Tech Stack (Simple View)
 
-Containerization: Docker & Docker Hub
+* **CI/CD:** GitHub Actions (automation engine)
+* **Containers:** Docker & Docker Hub
+* **Cloud Server:** AWS EC2
+* **App:** Python (Flask) + pytest
 
-Cloud: AWS EC2
+---
 
-Language: Python (Flask app with pytest tests)
+## 🛠️ How It Works (Step by Step)
 
-🛠️ How It Works
+1. Developer pushes code to GitHub (`main` branch)
+2. GitHub Actions pipeline starts automatically
+3. Pipeline performs the following steps:
 
-Code changes are pushed to the main branch.
+   * Downloads the code
+   * Installs dependencies
+   * Runs automated tests
+   * Builds and tags a Docker image
+   * Pushes the image to Docker Hub
+   * Connects to EC2 using SSH
+   * Pulls the latest image and runs the container
+4. Application becomes live on the EC2 public IP
 
-GitHub Actions automatically:
+---
 
-Checks out the repo
+## 🔐 Secrets Used (For Security)
 
-Installs dependencies
+These are stored safely in GitHub Secrets:
 
-Runs tests
+* `DOCKER_USERNAME` – Docker Hub username
+* `DOCKER_PASSWORD` – Docker Hub access token
+* `EC2_HOST` – EC2 public IP or DNS
+* `EC2_USERNAME` – Linux user (e.g. ec2-user)
+* `EC2_SSH_KEY` – EC2 private SSH key (.pem)
 
-Builds and tags a Docker image
+No secrets are hardcoded.
 
-Pushes the image to Docker Hub
+---
 
-SSHs into EC2, pulls the new image, and runs the updated container
+## 📁 Important Files
 
-The app is accessible on the EC2 public IP after deployment.
+* `.github/workflows/main.yml` → CI/CD pipeline definition
+* `Dockerfile` → Builds the app image
+* `app.py` → Python web application
+* `test_app.py` → Automated tests using pytest
 
-🔐 Secrets Used
+---
 
-You’ll need to configure these in your GitHub repository:
+## ✅ Why This Project Is Strong
 
-DOCKER_USERNAME
+* Fully **automated CI/CD pipeline**
+* Tests run **before deployment** (safe releases)
+* Docker images are **versioned**
+* Old containers are replaced automatically
+* Uses **real DevOps tools** used in production
 
-DOCKER_PASSWORD
+---
 
-EC2_HOST
+## 🌐 Pipeline Flow (Easy to Remember)
 
-EC2_USERNAME
+`Push Code → Test → Build → Push Image → Deploy → Health Check ✅`
 
-EC2_SSH_KEY
+---
 
-📁 Key Files
+## 🧠 What I Learned
 
-.github/workflows/main.yml → GitHub Actions pipeline file
+* How CI/CD pipelines work from start to end
+* How GitHub Actions automates real deployments
+* How Docker simplifies app delivery
+* How cloud servers (EC2) run production apps
+* How DevOps removes manual deployment work
 
-Dockerfile → Builds the Python app image
+---
 
-test_app.py → Test file using pytest
-
-app.py → Simple Python web app
-
-✅ Highlights
-
-Full CI/CD automation from code push to deployment.
-
-Integrated automated testing before deployment.
-
-Versioned Docker images with SHA tagging.
-
-Zero-downtime deployment using Docker containers.
-
-Demonstrates real-world DevOps workflow using cloud and automation tools.
-
-🌐 Project Flow
-
-Push to main → GitHub Actions → Test → Build → Push to Docker Hub → Deploy to EC2 → Health Check ✅
-
-🧠 Learning Outcome
-
-Understanding of how CI/CD pipelines work end-to-end.
-
-Hands-on with GitHub Actions, Docker, and AWS EC2 automation.
-
-Real-world exposure to DevOps practices used in production systems.
+This project focuses on **clarity, automation, and reliability**, not fancy UI — exactly how real DevOps systems work.
